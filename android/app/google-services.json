@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "545724410194",
+    "firebase_url": "https://wallium-a1cd1.firebaseio.com",
+    "project_id": "wallium-a1cd1",
+    "storage_bucket": "wallium-a1cd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545724410194:android:0a0307ef788e6f0238b28b",
+        "android_client_info": {
+          "package_name": "com.wallium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545724410194-19k8mrs5eef3tajsmjbegkf9fejj779g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmpa8D82VYOhe1MYnqSy94zoW_xDMrJcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545724410194-19k8mrs5eef3tajsmjbegkf9fejj779g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
