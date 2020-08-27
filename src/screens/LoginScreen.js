@@ -5,6 +5,7 @@ import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
 import {windowHeight} from '../utils/Dimensions'
 import Images from '../constants/Images'
+import Colors from '../utils/Colors'
 
 export default function LoginScreen( {navigation} ) {
   const [email, setEmail] = useState ('')
@@ -53,13 +54,13 @@ export default function LoginScreen( {navigation} ) {
     margin: 0.002 * windowHeight,
     height: 300,
     width: 290,
-    borderColor: '#219653',
+    borderColor: Colors.SignGreen,
     borderRadius:10,
     borderWidth: 1,
     marginBottom: 20
   },
     container: {
-      backgroundColor: '#121111',
+      backgroundColor: Colors.theme,
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center'
@@ -74,7 +75,7 @@ export default function LoginScreen( {navigation} ) {
     },
     navButtonText: {
       fontSize: 20,
-      color: '#219653',
+      color: Colors.SignGreen,
       marginBottom: 40
     }
   });

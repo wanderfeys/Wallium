@@ -1,14 +1,14 @@
 import React from 'react'
 import {StyleSheet,TouchableOpacity, Text} from 'react-native'
 import {windowHeight,  windowWidth} from '../utils/Dimensions'
-
+import { Button } from 'react-native-paper';
 
 export default function ({buttonTitle, ...rest}) {
 
   return (
-    <TouchableOpacity style = { styles.buttonContainer} {...rest}>
+    <Button style = { styles.buttonContainer} {...rest}>
       <Text style = {styles.buttonText}>{buttonTitle} </Text>
-    </TouchableOpacity>
+    </Button>
 
   )
 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
      backgroundColor: "#35089e"
   },
   buttonText: {
-     fontSize: 28,
+     fontSize: 18,
      color: '#219653'
 
 

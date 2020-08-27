@@ -2,9 +2,8 @@ import  React from 'react';
 import { createStackNavigator  } from '@react-navigation/stack';
 import SignUpScreen from '../screens/SignUpScreen';
 import LoginScreen from '../screens/LoginScreen';
-import ChatScreen from '../screens/ChatScreen';
 import auth from '@react-native-firebase/auth'
-
+import Colors from '../utils/Colors'
 
 const Stack = createStackNavigator();
 
@@ -20,13 +19,14 @@ export default function AuthStack() {
       <Stack.Screen name='Signup'
       component={SignUpScreen}
       options={{
-         title: 'SignUp',
+         title: 'WALLIUM',
          headerStyle: {
-           backgroundColor: '#35089e',
+           backgroundColor: Colors.theme,
          },
-         headerTintColor: '#219653',
+         headerRight: null,
+         headerTintColor: "#35089e",
          headerTitleStyle: {
-           alignSelf: 'flex-end',
+           alignSelf: 'center',
            fontWeight: 'bold',
          },
        }}

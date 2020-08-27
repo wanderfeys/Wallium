@@ -3,12 +3,18 @@ import { View, Text, StyleSheet } from 'react-native';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { AuthContext } from '../navigation/AuthProvider';
+import Colors from '../utils/Colors'
+
 
 export default function SignupScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
   const { register } = useContext(AuthContext);
+
+
+
+  
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Create an account</Text>
@@ -45,7 +51,7 @@ export default function SignupScreen({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#121111',
+    backgroundColor: Colors.theme,
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center'
@@ -54,6 +60,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     marginBottom: 10,
-    color: 'white'
+    color: Colors.white
   }
 });

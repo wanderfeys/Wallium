@@ -6,8 +6,10 @@ import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import Images from '../constants/Images'
 import ButtonWithBackground from '../components/ButtonWithBackground'
-import ChatScreen from '../screens/ChatScreen';
-
+import AddChatScreen from '../screens/AddChatScreen';
+import RoomScreen from '../screens/RoomScreen';
+import { IconButton } from 'react-native-paper';
+import Colors from '../utils/Colors'
 
 
 const Stack = createStackNavigator();
@@ -17,29 +19,83 @@ const Stack = createStackNavigator();
 
 
 export default function HomeStack({navigation}) {
-
+const {logout } = useContext(AuthContext);
 
   return (
     <Stack.Navigator>
       <Stack.Screen name='Home'
       component={HomeScreen}
+      options={({ navigation }) => ({
+        headerTitle:"WALLIUM",
+        headerTitleStyle: {
+           color: Colors.purple,
+           alignSelf: 'center'
+         },
+         headerStyle: {
+           borderBottomColor: Colors.SignGreen,
+           borderBottomWidth: 1,
+           backgroundColor: Colors.theme,
+                 },
+         headerLeft: () => (
+           <IconButton
+             onPress={() => logout()}
+             icon='account-arrow-left'
+             color='#ffffff'
+           />
+         ),
+         headerRight: () => (
+           <IconButton
+             icon='message-plus'
+             onPress = {() => navigation.navigate('AddChatScreen', {screen: {AddChatScreen}}) }
+             size={24}
+             color='#ffffff'
+           />
+         ),
+      })
+    }
       />
       <Stack.Screen
-          name='ChatScreen'
-          component={ChatScreen}
-          options={{
-             title: 'Chat',
-             headerStyle: {
-               backgroundColor: '#35089e',
-             },
-             headerTintColor: '#219653',
-             headerTitleStyle: {
-               alignSelf: 'flex-end',
-               fontWeight: 'bold',
-             },
-           }}
-      />
-
+          name='AddChatScreen'
+          component={AddChatScreen}
+          options={({ navigation }) => ({
+                    headerTitle: "WALLIUM",
+                    headerStyle: {
+                      backgroundColor: Colors.theme,
+                    },
+                    headerLeft: null,
+                    headerRight: () => (
+                      <IconButton
+                        icon='close-circle'
+                        size={28}
+                        color='white'
+                        onPress={() => navigation.goBack()}
+                      />
+                  )})
+                }
+                />
+    <Stack.Screen
+        name='RoomScreen'
+        component={RoomScreen}
+        options={({ navigation, route }) => ({
+                  title: route.params.thread.name,
+                  headerTitleStyle:{
+                    alignSelf: 'flex-end',
+                    color: Colors.purple,
+                  },
+                  headerStyle: {
+                    backgroundColor: Colors.theme,
+                  },
+                  headerRight: null,
+                  headerLeft: () => (
+                    <IconButton
+                      icon='arrow-left'
+                      size={28}
+                      color= 'white'
+                      onPress={() => navigation.goBack()}
+                    />
+                )})
+              }
+        />
     </Stack.Navigator>
   );
 }

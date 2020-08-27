@@ -5,7 +5,7 @@ export default function Loading () {
 
   return (
     <View style = {styles.loadingContainer}>
-      <ActivityIndicator size='large' color='#664'/>
+      <ActivityIndicator size='large' color='#6646ee'/>
     </View>
   )
 
