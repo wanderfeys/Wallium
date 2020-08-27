@@ -1,4 +1,4 @@
-import React, { useContext,useLayoutEffect,useState,useEffect } from 'react';
+import React, { useContext,useState,useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -16,11 +16,19 @@ function AddChatScreen ({navigation}){
       firestore()
         .collection('groups')
         .add({
-          name: groupName
+          name: groupName,
+          latestMessage: {
+            text: `You have joined the room ${groupName}.`,
+            createdAt: new Date().getTime()
+          }
         })
-        .then(() => {
+        .then(docRef => {
+          docRef.collection('MESSAGES').add ({
+            text: `You have joined the room ${groupName}.`,
+            createdAt: new Date().getTime(),
+            system: true
+          })
           navigation.navigate('Home')
-          console.log('Group added!');
         });
     }
 

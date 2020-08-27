@@ -1,4 +1,4 @@
-import React, { useContext,useLayoutEffect,useState,useEffect } from 'react';
+import React, { useContext,useState,useEffect } from 'react';
 import { View, Text, StyleSheet,FlatList, TouchableOpacity } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -8,20 +8,25 @@ import { IconButton, Divider,List } from 'react-native-paper';
 import Loading from '../components/Loading';
 import firestore from '@react-native-firebase/firestore';
 import Colors from '../utils/Colors'
+import useStatusBar from '../utils/useStatusBar'
 
 export default function HomeScreen({navigation}) {
     const [threads,setThreads] = useState([])
     const [loading,setLoading] = useState(true)
     const { user } = useContext(AuthContext);
+    useStatusBar('dark-content');
 
     useEffect(() => {
     const unsubscribe = firestore()
       .collection('groups')
+      .orderBy('latestMessage.createdAt', 'desc')
       .onSnapshot(querySnapshot => {
         const threads = querySnapshot.docs.map(documentSnapshot => {
           return {
             _id: documentSnapshot.id,
-            // give defaults
+            latestMessage: {
+              text: ''
+            },
             name: '',
             ...documentSnapshot.data()
           };
@@ -61,7 +66,7 @@ export default function HomeScreen({navigation}) {
                     onPress = {() => navigation.navigate('RoomScreen', {thread: item})} >
                       <List.Item
                         title={item.name}
-                        description='Group description'
+                        description={item.latestMessage.text}
                         titleNumberOfLines={1}
                         titleStyle={styles.listTitle}
                         descriptionStyle={styles.listDescription}
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
   listDescription: {
     borderBottomColor: Colors.white,
     borderBottomWidth: 1,
-    color: Colors.white,
+    color: Colors.SignGreen,
     fontSize: 16
   },
   iconStyle: {

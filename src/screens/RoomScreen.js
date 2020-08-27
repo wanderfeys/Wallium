@@ -1,6 +1,6 @@
 import React, {useState,useEffect, useContext} from 'react'
 import { View, StyleSheet,ActivityIndicator } from 'react-native';
-import {GiftedChat,Bubble, Send } from 'react-native-gifted-chat'
+import {GiftedChat,Bubble, Send,SystemMessage  } from 'react-native-gifted-chat'
 import { IconButton } from 'react-native-paper';
 import { AuthContext } from '../navigation/AuthProvider';
 import Colors from '../utils/Colors'
@@ -79,6 +79,17 @@ export default function RoomScreen ({ route })  {
           )
     }
 
+  function renderSystemMessage(props) {
+    return (
+      <SystemMessage
+        {...props}
+        wrapperStyle={styles.systemMessageWrapper}
+        textStyle={styles.systemMessageText}
+      />
+
+    )
+
+  }
 
   function renderBubble(props) {
 
@@ -142,6 +153,7 @@ export default function RoomScreen ({ route })  {
                 placeholder='Type your wisdom words here...'
                 showUserAvatar
                 alwaysShowSend
+                renderSystemMessage={renderSystemMessage}
                 renderSend={renderSend}
                 scrollToBottomComponent={scrollToBottomComponent}
                 renderLoading={renderLoading}
@@ -156,6 +168,16 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: Colors.theme
     },
+    systemMessageText: {
+      fontSize: 14,
+      color:'#fff',
+      fontWeight: 'bold'
+    },
+    systemMessageWrapper: {
+         backgroundColor: '#6646ee',
+         borderRadius: 4,
+         padding: 5
+      },
     sendingContainer: {
       justifyContent: 'center',
       alignItems: 'center'

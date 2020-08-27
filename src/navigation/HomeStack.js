@@ -1,4 +1,4 @@
-import  React, {useContext, useLayoutEffect} from 'react';
+import  React, {useContext} from 'react';
 import { Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
@@ -99,29 +99,3 @@ const {logout } = useContext(AuthContext);
     </Stack.Navigator>
   );
 }
-/*
-useLayoutEffect(() => {
-
-  navigation.setOptions({
-    headerTitleStyle: {
-       color: 'white',
-       alignSelf: 'flex-end'
-     },
-     headerStyle: {
-               backgroundColor: '#35089e',
-             },
-     headerLeft: () => (
-       <ButtonWithBackground
-         onPress={() => logout()}
-         image={Images.logout}
-       />
-     ),
-     headerRight: () => (
-       <ButtonWithBackground
-         onPress = {() => RootNavigation.navigate('ChatScreen', {screen: {ChatScreen}}) }
-         image={Images.add}
-       />
-     ),
-  })
-  }
-*/
