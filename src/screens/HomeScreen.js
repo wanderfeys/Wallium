@@ -10,7 +10,7 @@ import firestore from '@react-native-firebase/firestore';
 import Colors from '../utils/Colors'
 import useStatusBar from '../utils/useStatusBar'
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({navigation,route}) {
     const [threads,setThreads] = useState([])
     const [loading,setLoading] = useState(true)
     const { user } = useContext(AuthContext);
@@ -49,7 +49,21 @@ export default function HomeScreen({navigation}) {
     return <Loading />;
   }
 
-
+  function handleLongPress() {
+    return (alert('Delete function will be soon'))
+  }
+  //   firestore()
+  //     .collection('groups')
+  //     .doc('threads._id')
+  //     .delete()
+  //     .then(() => {
+  //       console.log(threads.name)
+  //
+  //     }
+  //
+  //     )
+  //
+  // }
 
 
 
@@ -63,7 +77,9 @@ export default function HomeScreen({navigation}) {
                   ItemSeparatorComponent={() => <Divider />}
                   renderItem={({ item }) => (
                   <TouchableOpacity
-                    onPress = {() => navigation.navigate('RoomScreen', {thread: item})} >
+                    onPress = {() => navigation.navigate('RoomScreen', {thread: item})}
+                    onLongPress={handleLongPress}
+                    >
                       <List.Item
                         title={item.name}
                         description={item.latestMessage.text}

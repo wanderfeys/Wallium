@@ -1,19 +1,27 @@
 import React from 'react'
-import {StyleSheet,TextInput} from 'react-native'
+import {StyleSheet,TextInput,Text,View} from 'react-native'
 import {windowHeight,  windowWidth} from '../utils/Dimensions'
+import Colors from '../utils/Colors'
 
 
-export default function FormInput ({labelValue, placeholderText, ...rest}) {
+export default function FormInput ({term,error, placeholderText,onValidatePasswordField,onValidateEmailField, ...rest}) {
 
   return (
-    <TextInput
-      value={labelValue}
-      style= {styles.input}
-      numberOflines={1}
-      placeholder ={placeholderText}
-      placeholderTextColor='#EEEEEE'
-      {...rest}
-    />
+    <View>
+        <Text style={styles.ErrorText}>{error} </Text>
+        <View>
+        <TextInput
+          value={term}
+          style= {styles.input}
+          numberOflines={1}
+          placeholder ={placeholderText}
+          placeholderTextColor='#EEEEEE'
+          onEndEditing = {onValidatePasswordField}
+          onEndEditingEmail = {onValidateEmailField}
+          {...rest}
+        />
+        </View>
+    </View>
 
 
 
@@ -31,5 +39,12 @@ export default function FormInput ({labelValue, placeholderText, ...rest}) {
       borderRadius: 8,
       borderWidth: 1,
       borderColor: 'white'
-    }
+    },
+    ErrorText: {
+      fontSize: 14,
+      color: Colors.red,
+      marginBottom: 2,
+      marginHorizontal:10
+
+  },
   });

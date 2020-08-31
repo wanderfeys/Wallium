@@ -2,6 +2,8 @@ import  React from 'react';
 import { createStackNavigator  } from '@react-navigation/stack';
 import SignUpScreen from '../screens/SignUpScreen';
 import LoginScreen from '../screens/LoginScreen';
+import SplashScreen from '../screens/SplashScreen';
+
 import auth from '@react-native-firebase/auth'
 import Colors from '../utils/Colors'
 
@@ -10,7 +12,12 @@ const Stack = createStackNavigator();
 
 export default function AuthStack() {
   return (
-    <Stack.Navigator initialRouteName='Login'>
+    <Stack.Navigator initialRouteName='SplashScreen'>
+      <Stack.Screen
+        name='SplashScreen'
+        component={SplashScreen}
+        options={{ header: () => null }}
+      />
       <Stack.Screen
         name='Login'
         component={LoginScreen}
@@ -26,7 +33,9 @@ export default function AuthStack() {
          headerRight: null,
          headerTintColor: "#35089e",
          headerTitleStyle: {
-           alignSelf: 'center',
+           flex: 1,
+           justifyContent: 'center',
+           alignItems: 'flex-end',
            fontWeight: 'bold',
          },
        }}

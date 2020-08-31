@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, ActivityIndicator, StyleSheet} from 'react-native'
-
+import Colors from '../utils/Colors'
 export default function Loading () {
 
   return (
@@ -16,7 +16,8 @@ export default function Loading () {
    loadingContainer: {
      flex: 1,
      alignItems: 'center',
-     justifyContent: 'center'
+     justifyContent: 'center',
+     backgroundColor: Colors.theme
 
    }
 

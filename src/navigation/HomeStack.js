@@ -62,6 +62,10 @@ const {logout } = useContext(AuthContext);
                     headerStyle: {
                       backgroundColor: Colors.theme,
                     },
+                    headerTitleStyle:{
+                      alignSelf: 'flex-start',
+                      color: Colors.purple,
+                    },
                     headerLeft: null,
                     headerRight: () => (
                       <IconButton

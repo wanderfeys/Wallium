@@ -6,6 +6,7 @@ import ButtonWithBackground from '../components/ButtonWithBackground'
 import FormInput from '../components/FormInput';
 import firestore from '@react-native-firebase/firestore';
 import Colors from '../utils/Colors'
+import Button from '../components/Buttons'
 
 function AddChatScreen ({navigation}){
   const [groupName, setGroupName] = useState('');
@@ -41,14 +42,14 @@ function AddChatScreen ({navigation}){
           <Text style={styles.text} >Create new Chat</Text>
           <FormInput
             value={groupName}
-            placeholderText='Group Name'
+            placeholderText='Enter Chat Name . . .'
             onChangeText={groupTitle => setGroupName(groupTitle)}
             autoCapitalize='none'
             autoCorrect={false}
             color='white'
             />
-          <FormButton
-            buttonTitle='Create Group'
+          <Button
+            title='Create Group'
             onPress={() => createGroup()}
           />
         </View>

@@ -146,10 +146,10 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile file('wanderfeys.keystore')
+            storePassword 'wanderfeys'
+            keyAlias 'wallium'
+            keyPassword 'wanderfeys'
         }
     }
     buildTypes {
