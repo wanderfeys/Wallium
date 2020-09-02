@@ -1,17 +1,17 @@
-import React, {useState,useEffect, useContext} from 'react'
-import { View, StyleSheet,ActivityIndicator } from 'react-native';
-import {GiftedChat,Bubble, Send,SystemMessage  } from 'react-native-gifted-chat'
-import { IconButton } from 'react-native-paper';
-import { AuthContext } from '../navigation/AuthProvider';
+import React, { useState,useEffect, useContext } from 'react'
+import { View, StyleSheet,ActivityIndicator } from 'react-native'
+import { GiftedChat,Bubble, Send,SystemMessage  } from 'react-native-gifted-chat'
+import { IconButton } from 'react-native-paper'
+import firestore from '@react-native-firebase/firestore'
+import { AuthContext } from '../navigation/AuthProvider'
 import Colors from '../utils/Colors'
-import firestore from '@react-native-firebase/firestore';
 
 
 export default function RoomScreen ({ route })  {
-  const {user}= useContext(AuthContext);
-  const currentUser = user.toJSON();
-  const { thread } = route.params;
-  const [messages, setMessages] = useState([]);
+  const { user }= useContext(AuthContext)
+  const currentUser = user.toJSON()
+  const { thread } = route.params
+  const [messages, setMessages] = useState([])
 
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function RoomScreen ({ route })  {
       .orderBy('createdAt', 'desc')
       .onSnapshot(querySnapshot=> {
         const messages = querySnapshot.docs.map(doc => {
-          const firebaseData = doc.data();
+          const firebaseData = doc.data()
 
           const data = {
             _id: doc.id,
@@ -38,12 +38,12 @@ export default function RoomScreen ({ route })  {
               }
           }
 
-          return data;
+          return data
         })
          setMessages(messages)
 
       })
-      return () => messagesListener();
+      return () => messagesListener()
 }, [])
 
 
@@ -53,7 +53,7 @@ export default function RoomScreen ({ route })  {
 
 
   async function handleSend(messages) {
-    const text = messages[0].text;
+    const { text } = messages[0]
     firestore()
       .collection('groups')
       .doc(thread._id)
@@ -65,17 +65,17 @@ export default function RoomScreen ({ route })  {
           _id: currentUser.uid,
           email: currentUser.email
         }
-      });
+      })
         await firestore()
           .collection('groups')
           .doc(thread._id)
           .set (
-              {latestMessage: {
+              { latestMessage: {
                 text,
                 createdAt: new Date().getTime()
               }
             },
-            { merge: true}
+            { merge: true }
           )
     }
 
@@ -94,30 +94,30 @@ export default function RoomScreen ({ route })  {
   function renderBubble(props) {
 
     return (
-        <Bubble
-            {...props}
-            wrapperStyle={{
+      <Bubble
+        {...props}
+        wrapperStyle={{
                 right: {
                   backgroundColor: Colors.purple
                 }
             }}
-            textStyle={{
+        textStyle={{
                 right: {
                   color: Colors.white
                 }
             }}
-        />
+      />
     )
 
   }
   function renderSend(props) {
 
     return (
-        <Send  {...props} >
-          <View style={styles.sendingContainer}>
-            <IconButton icon='send-circle' size={32} color={Colors.purple} />
-          </View>
-        </Send>
+      <Send {...props}>
+        <View style={styles.sendingContainer}>
+          <IconButton icon="send-circle" size={32} color={Colors.purple} />
+        </View>
+      </Send>
 
     )
 
@@ -125,7 +125,7 @@ export default function RoomScreen ({ route })  {
   function scrollToBottomComponent() {
     return (
       <View style={styles.scrollComponent}>
-        <IconButton icon='chevron-double-down' size={32} color={Colors.purple}  />
+        <IconButton icon="chevron-double-down" size={32} color={Colors.purple}  />
       </View>
 
     )
@@ -135,7 +135,7 @@ export default function RoomScreen ({ route })  {
   function renderLoading() {
     return (
       <View style={styles.loadingComponent}>
-        <ActivityIndicator size='large' color={Colors.SignGreen} />
+        <ActivityIndicator size="large" color={Colors.SignGreen} />
       </View>
 
     )
@@ -145,21 +145,21 @@ export default function RoomScreen ({ route })  {
 
     return (
       <View style={styles.container}>
-          <GiftedChat
-                messages={messages}
-                onSend={handleSend}
-                user={{ _id: currentUser.uid }}
-                renderBubble={renderBubble}
-                placeholder='Type your wisdom words here...'
-                showUserAvatar
-                alwaysShowSend
-                renderSystemMessage={renderSystemMessage}
-                renderSend={renderSend}
-                scrollToBottomComponent={scrollToBottomComponent}
-                renderLoading={renderLoading}
-                scrollToBottom
-          />
-     </View>
+        <GiftedChat
+          messages={messages}
+          onSend={handleSend}
+          user={{ _id: currentUser.uid }}
+          renderBubble={renderBubble}
+          placeholder="Type your wisdom words here..."
+          showUserAvatar
+          alwaysShowSend
+          renderSystemMessage={renderSystemMessage}
+          renderSend={renderSend}
+          scrollToBottomComponent={scrollToBottomComponent}
+          renderLoading={renderLoading}
+          scrollToBottom
+        />
+      </View>
     )
   }
 
@@ -191,4 +191,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }
-  });
+  })

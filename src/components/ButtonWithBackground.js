@@ -1,22 +1,22 @@
-import React from 'react';
-import { TouchableOpacity, StyleSheet, Image, View } from 'react-native';
+import React from 'react'
+import { TouchableOpacity, StyleSheet, Image, View } from 'react-native'
 
 
 const ButtonWithBackground = (props) => {
 
-    const { title = 'Enter', style = {}, onPress, image } = props;
+    const { title = 'Enter', style = {}, onPress, image } = props
 
     return (
-        <View style={[styles.button, style]}>
-            <TouchableOpacity onPress = {onPress}>
-                <Image
-                    source={image}
-                    style={styles.ImageIconStyle}
-                />
-            </TouchableOpacity>
-        </View>
-    );
-};
+      <View style={[styles.button, style]}>
+        <TouchableOpacity onPress={onPress}>
+          <Image
+            source={image}
+            style={styles.ImageIconStyle}
+          />
+        </TouchableOpacity>
+      </View>
+    )
+}
 const styles = StyleSheet.create({
     button:{
       display:'flex',

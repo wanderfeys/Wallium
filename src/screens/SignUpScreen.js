@@ -1,20 +1,19 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import FormButton from '../components/FormButton';
-import FormInput from '../components/FormInput';
-import { AuthContext } from '../navigation/AuthProvider';
+import React, { useState, useContext } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import FormInput from '../components/FormInput'
+import { AuthContext } from '../navigation/AuthProvider'
 import Colors from '../utils/Colors'
 import Button from '../components/Buttons'
 import Utility from '../utils/Utility'
 import String from '../constants/String'
-import Loading from '../components/Loading';
+import Loading from '../components/Loading'
 
 
 
-export default function SignupScreen({navigation}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { register } = useContext(AuthContext);
+export default function SignupScreen({ navigation }) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { register } = useContext(AuthContext)
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState ('')
   const [isLoading,setLoading] = useState(false)
@@ -61,10 +60,10 @@ export default function SignupScreen({navigation}) {
       <FormInput
         error={emailError}
         value={email}
-        placeholderText='Email'
+        placeholderText="Email"
         onChangeText={userEmail => setEmail(userEmail)}
-        autoCapitalize='none'
-        keyboardType='email-address'
+        autoCapitalize="none"
+        keyboardType="email-address"
         autoCorrect={false}
         color={Colors.SignGreen}
         onValidateEmailField={validateEmailAddress}
@@ -72,17 +71,17 @@ export default function SignupScreen({navigation}) {
       <FormInput
         error={passwordError}
         value={password}
-        placeholderText='Password'
+        placeholderText="Password"
         onChangeText={userPassword => setPassword(userPassword)}
-        secureTextEntry={true}
+        secureTextEntry
         color={Colors.SignGreen}
         onValidatePasswordField={validatePasswordField}
       />
 
-      <Button title='Register' onPress={perfomAuth} />
+      <Button title="Register" onPress={perfomAuth} />
 
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -98,4 +97,4 @@ const styles = StyleSheet.create({
     marginBottom: 22,
     color: Colors.white
   }
-});
+})

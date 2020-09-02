@@ -10,4 +10,4 @@ const String = {
 
 
 }
-export default String;
+export default String

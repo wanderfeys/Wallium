@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react'
-import {StyleSheet,View, Text, Image} from 'react-native'
-import Colors from '../utils/Colors'
-import {windowHeight} from '../utils/Dimensions'
+import React, { useEffect } from 'react'
+import { StyleSheet,View, Image } from 'react-native'
 import auth from '@react-native-firebase/auth'
+import Colors from '../utils/Colors'
+import { windowHeight } from '../utils/Dimensions'
 import Images from '../constants/Images'
 
 
 
-export default function SplashScreen ({navigation}) {
+export default function SplashScreen ({ navigation }) {
 
     useEffect(() => {
       NavigateToAuthScreen()
@@ -15,17 +15,17 @@ export default function SplashScreen ({navigation}) {
 
 
     function NavigateToAuthScreen () {
-      const {currentUser} = auth()
+      const { currentUser } = auth()
       setTimeout(function () {
         if(currentUser != null) {
           navigation.reset({
               index: 0,
-              routes: [{name: 'Home'}]
+              routes: [{ name: 'Home' }]
           })
         }else {
           navigation.reset({
             index: 0,
-            routes: [{name:'Login'}]
+            routes: [{ name:'Login' }]
           })
         }
 
@@ -37,8 +37,8 @@ export default function SplashScreen ({navigation}) {
 
 
 return (
-  <View style = {styles.container}>
-    <Image style={styles.logo} source={Images.logo}></Image>
+  <View style={styles.container}>
+    <Image style={styles.logo} source={Images.logo} />
   </View>
 
 )
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
       margin: 0.04 * windowHeight,
       borderColor: Colors.SignGreen,
       borderRadius:10,
-      borderWidth: 1,
+      borderWidth: 1
     },
     container: {
       flex:1,

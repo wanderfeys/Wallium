@@ -1,30 +1,29 @@
-import React, { useState,useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native';
-import FormButton from '../components/FormButton';
-import FormInput from '../components/FormInput';
-import { AuthContext } from '../navigation/AuthProvider';
-import {windowHeight} from '../utils/Dimensions'
+import React, { useState,useContext } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native'
+import FormInput from '../components/FormInput'
+import { AuthContext } from '../navigation/AuthProvider'
+import { windowHeight } from '../utils/Dimensions'
 import Images from '../constants/Images'
 import Colors from '../utils/Colors'
 import Button from '../components/Buttons'
 import Utility from '../utils/Utility'
 import String from '../constants/String'
-import Loading from '../components/Loading';
+import Loading from '../components/Loading'
 
-export default function LoginScreen( {navigation} ) {
+export default function LoginScreen( { navigation } ) {
   const [email, setEmail] = useState ('')
   const [password, setPassword] = useState ('')
-  const {login} = useContext(AuthContext)
+  const { login } = useContext(AuthContext)
   const [isLoading,setLoading] = useState(false)
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState ('')
 
-  
+
 
   function validateEmailAddress  ()  {
     const isValidEmail = Utility.isEmailValid(email)
     isValidEmail ? setEmailError('') : setEmailError(String.InvalidEmailAdress)
-    return isValidEmail
+    return isValidEmailm
     }
 
   function validatePasswordField ()  {
@@ -52,17 +51,17 @@ export default function LoginScreen( {navigation} ) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={Images.logo}></Image>
-      <Text style={ styles.text}> Welcome to Wallium  </Text>
+      <Image style={styles.logo} source={Images.logo} />
+      <Text style={styles.text}> Welcome to Wallium  </Text>
       <FormInput
         error={emailError}
         value={email}
-        placeholderText='Email'
+        placeholderText="Email"
         onChangeText={userEmail => setEmail(userEmail)}
-        autoCapitalize='none'
-        keyboardType='email-address'
+        autoCapitalize="none"
+        keyboardType="email-address"
         autoCorrect={false}
-        color='#219653'
+        color="#219653"
         onValidateEmailField={validateEmailAddress}
       />
       <FormInput
@@ -70,17 +69,17 @@ export default function LoginScreen( {navigation} ) {
         value={password}
         placeholderText="Password"
         onChangeText={userPassword => setPassword (userPassword)}
-        secureTextEntry={true}
-        color = '#219653'
+        secureTextEntry
+        color="#219653"
         onValidatePasswordField={validatePasswordField}
       />
-      <Button title='Login' onPress={perfomAuth} />
+      <Button title="Login" onPress={perfomAuth} />
       <TouchableOpacity
         style={styles.navButton}
         onPress={()=> navigation.navigate('Signup')}
       >
-        <Text style= { styles.navButtonText}> New user? Join here </Text>
-     </TouchableOpacity>
+        <Text style={styles.navButtonText}> New user? Join here </Text>
+      </TouchableOpacity>
 
     </View>
 
@@ -121,4 +120,4 @@ export default function LoginScreen( {navigation} ) {
       color: Colors.SignGreen,
       marginBottom: 40
     }
-  });
+  })

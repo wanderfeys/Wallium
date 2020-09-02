@@ -1,15 +1,14 @@
-import React, { useContext,useState,useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import FormButton from '../components/FormButton';
-import { AuthContext } from '../navigation/AuthProvider';
+import React, { useContext,useState,useEffect } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import firestore from '@react-native-firebase/firestore'
+import { AuthContext } from '../navigation/AuthProvider'
 import ButtonWithBackground from '../components/ButtonWithBackground'
-import FormInput from '../components/FormInput';
-import firestore from '@react-native-firebase/firestore';
+import FormInput from '../components/FormInput'
 import Colors from '../utils/Colors'
 import Button from '../components/Buttons'
 
-function AddChatScreen ({navigation}){
-  const [groupName, setGroupName] = useState('');
+function AddChatScreen ({ navigation }){
+  const [groupName, setGroupName] = useState('')
 
 
   function createGroup () {
@@ -30,7 +29,7 @@ function AddChatScreen ({navigation}){
             system: true
           })
           navigation.navigate('Home')
-        });
+        })
     }
 
 
@@ -38,21 +37,21 @@ function AddChatScreen ({navigation}){
 
 
     return(
-        <View style={styles.container}>
-          <Text style={styles.text} >Create new Chat</Text>
-          <FormInput
-            value={groupName}
-            placeholderText='Enter Chat Name . . .'
-            onChangeText={groupTitle => setGroupName(groupTitle)}
-            autoCapitalize='none'
-            autoCorrect={false}
-            color='white'
-            />
-          <Button
-            title='Create Group'
-            onPress={() => createGroup()}
-          />
-        </View>
+      <View style={styles.container}>
+        <Text style={styles.text}>Create new Chat</Text>
+        <FormInput
+          value={groupName}
+          placeholderText="Enter Chat Name . . ."
+          onChangeText={groupTitle => setGroupName(groupTitle)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          color="white"
+        />
+        <Button
+          title="Create Group"
+          onPress={() => createGroup()}
+        />
+      </View>
 
 
 
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     color: Colors.SignGreen,
     marginBottom: 100
   }
-});
+})
 
 
-export default AddChatScreen;
+export default AddChatScreen

@@ -1,20 +1,19 @@
-import React, { useContext,useState,useEffect } from 'react';
-import { View, Text, StyleSheet,FlatList, TouchableOpacity } from 'react-native';
-import FormButton from '../components/FormButton';
-import { AuthContext } from '../navigation/AuthProvider';
+import React, { useContext,useState,useEffect } from 'react'
+import { View, Text, StyleSheet,FlatList, TouchableOpacity } from 'react-native'
+import { IconButton, Divider,List } from 'react-native-paper'
+import firestore from '@react-native-firebase/firestore'
+import { AuthContext } from '../navigation/AuthProvider'
 import Images from '../constants/Images'
 import ButtonWithBackground from '../components/ButtonWithBackground'
-import { IconButton, Divider,List } from 'react-native-paper';
-import Loading from '../components/Loading';
-import firestore from '@react-native-firebase/firestore';
+import Loading from '../components/Loading'
 import Colors from '../utils/Colors'
 import useStatusBar from '../utils/useStatusBar'
 
-export default function HomeScreen({navigation,route}) {
+export default function HomeScreen({ navigation,route }) {
     const [threads,setThreads] = useState([])
     const [loading,setLoading] = useState(true)
-    const { user } = useContext(AuthContext);
-    useStatusBar('dark-content');
+    const { user } = useContext(AuthContext)
+    useStatusBar('dark-content')
 
     useEffect(() => {
     const unsubscribe = firestore()
@@ -29,24 +28,24 @@ export default function HomeScreen({navigation,route}) {
             },
             name: '',
             ...documentSnapshot.data()
-          };
-        });
+          }
+        })
 
-        setThreads(threads);
+        setThreads(threads)
 
         if (loading) {
-          setLoading(false);
+          setLoading(false)
         }
-      });
+      })
 
     /**
      * unsubscribe listener
      */
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [])
 
   if (loading) {
-    return <Loading />;
+    return <Loading />
   }
 
   function handleLongPress() {
@@ -70,30 +69,30 @@ export default function HomeScreen({navigation,route}) {
 
 
     return (
-            <View style={styles.container}>
-                <FlatList
-                  data={threads}
-                  keyExtractor={item => item._id}
-                  ItemSeparatorComponent={() => <Divider />}
-                  renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress = {() => navigation.navigate('RoomScreen', {thread: item})}
-                    onLongPress={handleLongPress}
-                    >
-                      <List.Item
-                        title={item.name}
-                        description={item.latestMessage.text}
-                        titleNumberOfLines={1}
-                        titleStyle={styles.listTitle}
-                        descriptionStyle={styles.listDescription}
-                        left={props => <List.Icon {...props} icon="chat" color='white' style={styles.iconStyle} />}
-                        descriptionNumberOfLines={1}
-                      />
-                  </TouchableOpacity>
+      <View style={styles.container}>
+        <FlatList
+          data={threads}
+          keyExtractor={item => item._id}
+          ItemSeparatorComponent={() => <Divider />}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RoomScreen', { thread: item })}
+              onLongPress={handleLongPress}
+            >
+              <List.Item
+                title={item.name}
+                description={item.latestMessage.text}
+                titleNumberOfLines={1}
+                titleStyle={styles.listTitle}
+                descriptionStyle={styles.listDescription}
+                left={props => <List.Icon {...props} icon="chat" color="white" style={styles.iconStyle} />}
+                descriptionNumberOfLines={1}
+              />
+            </TouchableOpacity>
                     )}
-                  />
-          </View>
-      );
+        />
+      </View>
+      )
 }
 const styles = StyleSheet.create({
   container: {
@@ -119,6 +118,6 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     borderColor: Colors.SignGreen,
-    borderWidth: 1,
+    borderWidth: 1
   }
-});
+})
